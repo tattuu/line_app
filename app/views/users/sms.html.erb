@@ -1,0 +1,5 @@
+<%= form_tag("/login/sms_auth/#{params[:id]}") do %>    
+    <p>4桁の認証番号<p>
+    <input type="password" name="password">
+    <input type="submit" value="ログイン">
+<% end %>

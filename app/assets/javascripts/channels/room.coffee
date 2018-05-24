@@ -10,11 +10,13 @@ App.room = App.cable.subscriptions.create "RoomChannel",
 
     # Called when there's incoming data on the websocket for this channel
 
-  speak: (message) ->
-    @perform 'speak', message: message
+  speak: (message, group) ->
+    @perform 'speak', message: message, group: group
 
 $(document).on 'keypress', '[data-behavior~=room_speaker]', (event) ->
   if event.keyCode is 13 # return = send
-    App.room.speak event.target.value
+    console.log(event.target.value)
+    console.log($('#group').val())
+    App.room.speak event.target.value, $('#group').val()
     event.target.value = ''
     event.preventDefault()

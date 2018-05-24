@@ -1,11 +1,15 @@
 
 <h1>Chat room</h1>
-
+<%= @current_user.id %>
 <div id="messages">
   <%= render @messages %>
 </div>
+<div class="new-post">
+    <input name="content" rows="2" cols="65" data-behavior="room_speaker">
+    <select id="group" name="group">
+      <option value="1">Group1</option>
+      <option value="2">Group2</option>
+      <option value="3">Group3</option>
+    </select>
+</div>
 
-<form>
-  <label>Say something:</label><br>
-  <input type="text" data-behavior="room_speaker">
-</form>

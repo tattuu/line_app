@@ -16,3 +16,7 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+setTimeout(function() {
+    $('#flash_welcome').fadeOut();
+}, 3000);

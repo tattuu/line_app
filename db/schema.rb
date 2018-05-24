@@ -10,15 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_22_154150) do
+ActiveRecord::Schema.define(version: 2018_05_24_085608) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "friends", force: :cascade do |t|
+    t.integer "from"
+    t.integer "to"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "messages", force: :cascade do |t|
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "group"
+    t.text "user_id"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.text "group"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.text "group"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "name"
+    t.text "sms"
+    t.string "remember_digest"
   end
 
 end
