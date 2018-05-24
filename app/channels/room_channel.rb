@@ -12,8 +12,6 @@ class RoomChannel < ApplicationCable::Channel
     user = User.find_by(id: current_user.id)
     user.group = data['group']
     user.save
-    Message.create!(content: data['content'], user_id: current_user.id, group: data['group'])
-    logger.debug("22")
-    logger.debug(user.show)
+    Message.create!(content: data['message'], user_id: current_user.id, group: data['group'])
   end
 end
