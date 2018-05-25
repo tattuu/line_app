@@ -4,8 +4,8 @@ class RoomsController < ApplicationController
   end
 
   def friends
+    @maybefriends = MaybeFriend.where(to:@current_user.id)
     @friends = Friend.where(from:@current_user.id).or(Friend.where(to:@current_user.id))
-    @maybefriends = MaybeFriend.find_by(to:@current_user)
 
   end
 end

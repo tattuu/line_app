@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "/signup" => "users#signup"
+  post "/users/create" => "users#create"
   get "/login" => "users#index"
   post "/login" => "users#login"
   post "/login/sms_auth/:id" => "users#sms_auth"

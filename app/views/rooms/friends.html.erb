@@ -1,8 +1,8 @@
 <p><%= @current_user.name %></p>
 <p><%= @current_user.id %></p>
-
+<img src="<%= "/user_images/#{@current_user.image_name}" %>" id="img_size">
 <p>知り合いかも</p>
-<% (@maybefriends || []).each do |mfriend| %>
+<% @maybefriends.each do |mfriend| %>
     <div id="mfriends">
         <%= render "mfriend", mfriend: mfriend %>
     </div>

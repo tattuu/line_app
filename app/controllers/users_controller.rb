@@ -7,35 +7,15 @@ class UsersController < ApplicationController
 
     require 'twilio-ruby'
 
-    account_sid = "AC431bb5c0cd0851755991cf3adc91cd21" 
-    auth_token = "06b596c4490be6ae31ca2e4c6d908256" 
-    @client = Twilio::REST::Client.new account_sid, auth_token
-    from = '+14124073609' # Your Twilio number
-    to = '+81' +  params[:phone] # Your mobile phone number
-
-    random = Random.new()
-    sms_auth = random.rand(9999)
-    sms_auth = format("%04d", sms_auth)
-
-    @client.messages.create(
-    from: from,
-    to: to,
-    body: sms_auth
-    )
-
     @user = User.find_by(phone: params[:phone])
     # バリデーションをする！(電話番号しか受け付けない！)
     if @user
-      @user.sms = sms_auth
-      @user.save
+      sms_send @user
       flash[:notice] = "あとちょっと！"
       redirect_to("/login/#{@user.id}")
     else
-      User.create!(phone: params[:phone])
-      @user = User.find_by(phone: params[:phone])
-      @user.sms = sms_auth
-      @user.save
-      redirect_to("/login/#{@user.id}")
+      flash[:notice] = "正しい電話番号を入れてね"
+      render("users/index")
     end
   end
 
@@ -54,13 +34,29 @@ class UsersController < ApplicationController
       remember @user
       redirect_to("/rooms/show")
     else
-      flash.now[:danger] = 'Invalid phone_num/auth_num combination'
+      flash[:notice] = 'Invalid phone_num/auth_num combination'
       render("users/sms")
     end
   end
 
   def top
     
+  end
+
+  def signup
+  end
+
+  def create
+
+    @user = User.new(phone: params[:phone], name: params[:name], image_name: "initial_profile.jpg")
+    # 保存が成功したかどうかで条件分岐をしてください
+    if @user.save
+      flash[:notice] = "ユーザー登録が完了しました"
+      sms_send @user
+      redirect_to("/login/#{@user.id}")
+    else
+      render("users/signup")
+    end
   end
 
 end
