@@ -1,0 +1,7 @@
+<div class="friend">
+    <% if friend.from == @current_user.id %>
+        <p><%= friend.to %></p>
+    <% else %>
+        <p><%= friend.from %></p>
+    <% end %>
+</div>

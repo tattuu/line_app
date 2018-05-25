@@ -1,1 +1,15 @@
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+<p><%= @current_user.name %></p>
+<p><%= @current_user.id %></p>
+
+<p>知り合いかも</p>
+<% (@maybefriends || []).each do |mfriend| %>
+    <div id="mfriends">
+        <%= render "mfriend", mfriend: mfriend %>
+    </div>
+<% end %>
+<p>友達</p>
+<% @friends.each do |friend| %>
+    <div id="friends">
+        <%= render "friend", friend: friend %>
+    </div>
+<% end %>

@@ -1,0 +1,2 @@
+class MaybeFriend < ApplicationRecord
+end

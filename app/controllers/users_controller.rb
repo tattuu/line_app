@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     body: sms_auth
     )
 
-    @user = User.find_by(name: params[:phone])
+    @user = User.find_by(phone: params[:phone])
     # バリデーションをする！(電話番号しか受け付けない！)
     if @user
       @user.sms = sms_auth
@@ -31,8 +31,8 @@ class UsersController < ApplicationController
       flash[:notice] = "あとちょっと！"
       redirect_to("/login/#{@user.id}")
     else
-      User.create!(name: params[:phone])
-      @user = User.find_by(name: params[:phone])
+      User.create!(phone: params[:phone])
+      @user = User.find_by(phone: params[:phone])
       @user.sms = sms_auth
       @user.save
       redirect_to("/login/#{@user.id}")
