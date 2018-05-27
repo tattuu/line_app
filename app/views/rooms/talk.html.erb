@@ -1,0 +1,11 @@
+<% if @group_name == "" %>
+    <%= @friend.name %>
+<% else %>
+    <%= @group_name %>
+<% end %>
+
+<div id="posts">
+  <%= render @posts %>
+</div>
+
+<input name="content" rows="2" cols="65" data-behavior="room_speaker">

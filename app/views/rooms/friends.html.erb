@@ -1,6 +1,5 @@
 <p><%= @current_user.name %></p>
-<p><%= @current_user.id %></p>
-<img src="<%= "/user_images/#{@current_user.image_name}" %>" id="img_size">
+<p><%= @current_user.id %><img src="<%= "/user_images/#{@current_user.image_name}" %>" id="img_size"></p>
 <p>知り合いかも</p>
 <% @maybefriends.each do |mfriend| %>
     <div id="mfriends">
@@ -13,3 +12,4 @@
         <%= render "friend", friend: friend %>
     </div>
 <% end %>
+

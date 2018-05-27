@@ -1,9 +1,15 @@
 module ApplicationCable
   class Connection < ActionCable::Connection::Base
     identified_by :current_user
+    identified_by :talk_id
 
     def connect
       self.current_user = find_verified_user
+      if current_talk = CurrentTalk.where(user_id: self.current_user.id).order(created_at: :DESC).to_a[0]
+        self.talk_id = current_talk.talk_params
+      else
+        self.talk_id = nil
+      end
     end
 
     protected

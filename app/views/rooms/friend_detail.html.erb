@@ -1,0 +1,9 @@
+<img src="/user_images/<%= @user.image_name %>" id="img_size" >
+<%= @user.id %>
+<%= link_to "トーク", "/rooms/#{@talk_id}" %>
+<% if @maybefriends_check then %>
+    <%= link_to("追加", "/rooms/friends/#{@user.id}/append", {method:"post"}) %>
+    <%= link_to("削除", "/rooms/friends/#{@user.id}/delete", {method:"post"}) %>
+<% else %>
+    <%= link_to("削除", "/rooms/friends/#{@user.id}/delete", {method:"post"}) %>
+<% end %>

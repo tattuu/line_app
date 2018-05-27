@@ -6,15 +6,16 @@ App.room = App.cable.subscriptions.create "RoomChannel",
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
-    $('#messages').append data['message']
+    $('#posts').append data['post']
 
     # Called when there's incoming data on the websocket for this channel
 
-  speak: (message, group) ->
-    @perform 'speak', message: message, group: group
+  talk: (post, talk_id) ->
+    @perform 'talk', post:post, talk_id:talk_id
 
 $(document).on 'keypress', '[data-behavior~=room_speaker]', (event) ->
   if event.keyCode is 13 # return = send
-    App.room.speak event.target.value, $('#group').val()
+
+    App.room.talk event.target.value, location.pathname.replace("/rooms/", "")
     event.target.value = ''
     event.preventDefault()

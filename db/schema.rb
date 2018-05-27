@@ -10,16 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_25_143032) do
+ActiveRecord::Schema.define(version: 2018_05_27_055850) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "current_talks", force: :cascade do |t|
+    t.integer "id"
+    t.integer "talk_params"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "friends", force: :cascade do |t|
     t.integer "from"
     t.integer "to"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "block"
   end
 
   create_table "maybe_friends", force: :cascade do |t|
@@ -27,6 +35,7 @@ ActiveRecord::Schema.define(version: 2018_05_25_143032) do
     t.integer "to"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "block"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -34,13 +43,23 @@ ActiveRecord::Schema.define(version: 2018_05_25_143032) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "group"
-    t.text "user_id"
+    t.text "id"
   end
 
   create_table "posts", force: :cascade do |t|
-    t.text "group"
+    t.integer "talk_id"
+    t.integer "speaker"
+    t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "talks", force: :cascade do |t|
+    t.integer "include"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "talk_id"
+    t.string "group_name"
   end
 
   create_table "users", force: :cascade do |t|

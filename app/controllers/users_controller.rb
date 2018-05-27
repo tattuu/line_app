@@ -23,8 +23,7 @@ class UsersController < ApplicationController
 
   end
 
-  def sms_auth
-       
+  def sms_auth 
     @user = User.find_by(id: params[:id])
     if @user.sms == params[:password]
       @user.sms = ""
@@ -32,7 +31,7 @@ class UsersController < ApplicationController
       flash[:notice] = "Welcome!"
       log_in @user
       remember @user
-      redirect_to("/rooms/show")
+      redirect_to("/rooms/friends")
     else
       flash[:notice] = 'Invalid phone_num/auth_num combination'
       render("users/sms")

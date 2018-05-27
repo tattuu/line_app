@@ -1,7 +1,7 @@
 <div class="friend">
     <% if friend.from == @current_user.id %>
-        <p><%= friend.to %></p>
+        <p><img src="/user_images/<%= @users.find_by(id:friend.to).image_name %>" id="img_size"><%= link_to "#{ friend.to }", "/friend/#{ friend.to }" %></p>
     <% else %>
-        <p><%= friend.from %></p>
+        <p><img src="/user_images/<%= @users.find_by(id:friend.from).image_name %>" id="img_size"><%= link_to "#{ friend.from }", "/friend/#{friend.from}" %></p>
     <% end %>
 </div>

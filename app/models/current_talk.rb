@@ -1,0 +1,2 @@
+class CurrentTalk < ApplicationRecord
+end
