@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2018_05_27_055850) do
   enable_extension "plpgsql"
 
   create_table "current_talks", force: :cascade do |t|
-    t.integer "id"
+    t.integer "user_id"
     t.integer "talk_params"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -36,14 +36,6 @@ ActiveRecord::Schema.define(version: 2018_05_27_055850) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "block"
-  end
-
-  create_table "messages", force: :cascade do |t|
-    t.text "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.text "group"
-    t.text "id"
   end
 
   create_table "posts", force: :cascade do |t|
