@@ -46,9 +46,17 @@ class UsersController < ApplicationController
   end
 
   def create
+    if !params[:image_name]
+      params[:image_name] = "initial_profile.jpg"
+    else 
+      @user.image_name = "#{@user.id}.jpg"
+      image = params[:image]
+      Find.binwrite("publick/user_images/#{@user.image_name}", image.read)
+    end
+    
 
-    @user = User.new(phone: params[:phone], name: params[:name], image_name: "initial_profile.jpg")
-    # 保存が成功したかどうかで条件分岐をしてください
+    @user = User.new(phone: params[:phone], name: params[:name], status_message: params[:status_message], account_id: params[:account_id], allow: params[:allow], image_name: params[:image_name])
+
     if @user.save
       flash[:notice] = "ユーザー登録が完了しました"
       sms_send @user
@@ -58,4 +66,41 @@ class UsersController < ApplicationController
     end
   end
 
+  def fix
+    
+  end
+ 
+  def fix_change
+
+  end
+
+  def fix_run
+  
+  end
+
+  def img_del
+  
+  end
+
+  def add
+    
+  end
+
+  def allow
+    user = User.find_by(id:@current_user.id)
+    if params[:id]
+      user.allow = 0
+    else
+      user.allow = 1
+    end
+    user.save
+    redirect_to("/friend/fix")
+  end
+
+  def search
+    user = User.finid_by(account_id: params[:content])
+    if user
+      
+    end
+  end
 end

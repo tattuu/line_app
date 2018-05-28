@@ -1,11 +1,16 @@
 <p><%= @current_user.name %></p>
-<p><%= @current_user.id %><img src="<%= "/user_images/#{@current_user.image_name}" %>" id="img_size"></p>
+<p><%= link_to("#{@current_user.id}", "/friend/fix") %><img src="<%= "/user_images/#{@current_user.image_name}" %>" id="img_size"></p>
+<%= link_to("友達追加", "/friend/add") %>
+
 <p>知り合いかも</p>
 <% @maybefriends.each do |mfriend| %>
     <div id="mfriends">
         <%= render "mfriend", mfriend: mfriend %>
     </div>
 <% end %>
+
+<p>グループ</p>
+
 <p>友達</p>
 <% @friends.each do |friend| %>
     <div id="friends">

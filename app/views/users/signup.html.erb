@@ -1,8 +1,16 @@
-<%= form_tag("/users/create") do %>
+<%= form_tag("/users/create", {multipart: true}) do %>
     <p>電話番号</p>
     <input name="phone">
     <p>ユーザー名</p>
     <input name="name">
+    <p>一言メッセージ(任意)</p>
+    <input name="status-message">
+    <p>ID</p>
+    <input name="id">
+    <p>IDによる友達追加を許可</p>
+    <input type="checkbox" name="allow" checked>
+    <p>サムネイル画像(任意)</p>
+    <input type="file" name="image">
 
     <input type="submit" value="新規登録">
 <% end %>

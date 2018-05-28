@@ -1,0 +1,21 @@
+プロフィール
+
+<%= link_to "/friend/fix/0", target: "_blanck" do %>
+    <%= image_tag  "/user_images/#{@current_user.image_name}" , :id => "img_size" %>
+<% end %>
+
+<p>名前<p>
+<%= link_to("#{@current_user.name}", "/friend/fix/1") %>
+
+<p>ステータスメッセージ</p>
+<%= link_to("#{@current_user.status_message}", "/friend/fix/2") %>
+
+<p>ID</p>
+<%= @current_user.account_id %>
+
+<p>IDによる友達追加を許可</p>
+<% if @current_user.allow then %>
+    <%= link_to("〇", "/friend/fix/allow/1", {method:"post"}) %>
+<% else %>
+    <%= link_to("×", "/friend/fix/allow/0", {method:"post"}) %>
+<% end %>

@@ -75,4 +75,22 @@ class RoomsController < ApplicationController
     end
     redirect_to("/rooms/friends")
   end
+
+  def talks
+    talks = Talk.where(include: @current_user.id)
+    talks = talks.where(group_name:"").select("talk_id").to_a
+    talk_id = []
+    friend_talk = []
+    @friend_name = []
+
+    
+    talks.each  do |n|
+      talk_id.append(n["talk_id"])
+    end
+    for n in talk_id
+      friend_talk.append(Talk.where(talk_id: n).where.not(include: @current_user.id).to_a)
+    end
+    logger.debug(friend_talk)
+  end
+
 end
